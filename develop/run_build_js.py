@@ -16,6 +16,18 @@ base.cmd_in_dir(git_dir + '/build_tools/', 'python3', ['configure.py', '--develo
 config.parse()
 config.parse_defaults()
 
+svr_org_dir = git_dir + "/server-org/"
+svr_curr_dir = git_dir + "/server/"
+svr_tool_dir = svr_curr_dir + "tools/"
+
+if base.is_exist(svr_org_dir) and base.is_arm():
+  base.print_info("ARM platform:: Copying the precompiled binaries for FileConverter and server tools ......... " + sys.argv[1])
+  base.copy_files(svr_org_dir + "FileConverter/bin/*", svr_curr_dir + "FileConverter/bin/")
+  if not base.is_exist(svr_tool_dir):
+    base.create_dir(svr_tool_dir)
+  base.copy_files(svr_org_dir + "tools/*", svr_curr_dir + "FileConverter/bin/")
+
+  
 if base.is_exist(git_dir + "/server/FileConverter/bin/fonts.log"):
   base.print_info('remove font cache to regenerate fonts in external sdkjs volume')
   base.delete_file(git_dir + "/server/FileConverter/bin/fonts.log")

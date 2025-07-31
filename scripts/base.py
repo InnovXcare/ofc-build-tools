@@ -1830,6 +1830,10 @@ def apply_patch(file, patch):
   replaceInFile(file, file_content_old, file_content_new)
   return
 
+def is_arm ():
+  os_type = get_platform()
+  return (-1 != os_type.find("arm")) or (-1 != os_type.find("aarch64"))
+
 def get_autobuild_version(product, platform="", branch="", build=""):
   download_platform = platform
   if ("" == download_platform):

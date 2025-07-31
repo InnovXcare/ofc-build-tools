@@ -22,10 +22,11 @@ def make():
     data_url = base.get_file_last_modified_url(url)
   
   old_data_url = base.readFile("./core.7z.data")
-
+  print("core version URL... --------------------------" + url)
+  
   if (data_url != "" and old_data_url != data_url):
     print("-----------------------------------------------------------")
-    print("Downloading core last version... --------------------------")
+    print("Downloading core last version... --------------------------" + url)
     print("-----------------------------------------------------------")
     if (base.is_file("./core.7z")):
       base.delete_file("./core.7z")
@@ -69,6 +70,8 @@ def make():
   print("-----------------------------------------------------------")
   print("All fonts generation... -----------------------------------")
   print("-----------------------------------------------------------")
+  print(" ----- curr dir ----")
+  base.cmd_exe("pwd", [])
   base.cmd_exe("./allfontsgen", ["--input=../../../core-fonts", "--allfonts-web=../../../sdkjs/common/AllFonts.js", "--allfonts=./AllFonts.js",
                                "--images=../../../sdkjs/common/Images", "--selection=./font_selection.bin", 
                                "--use-system=true", "--output-web=../../../fonts"])
